@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>PocketSmart AI</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="/static/style.css">
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- =====================================
+         HEADER
+    ====================================== -->
+
+    <header class="header">
+
+        <h1>💰 PocketSmart AI</h1>
+
+        <p>
+            Your Smart Budget & Recommendation Assistant
+        </p>
+
+    </header>
+
+
+
+    <!-- =====================================
+         CHAT SECTION
+    ====================================== -->
+
+    <section class="chat-section">
+
+        <h2>🤖 Chat with PocketSmart</h2>
+
+        <div id="chat-box">
+
+            <div class="message bot-message">
+
+                <strong>PocketSmart:</strong>
+
+                <p>
+                    Hi! 👋 Tell me about your spending
+                    and I'll help you manage your budget.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="chat-input">
+
+            <input
+                type="text"
+                id="message"
+                placeholder="Example: I spent ₹500 on food today"
+                onkeydown="handleEnter(event)"
+            >
+
+            <button onclick="sendMessage()">
+                Send
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+         SMART PLANNERS
+    ====================================== -->
+
+    <section class="planner-section">
+
+        <h2 class="planner-heading">
+            ✨ Smart Planners
+        </h2>
+
+        <p class="planner-description">
+            Select a planner to get personalized recommendations.
+        </p>
+
+
+
+        <!-- =================================
+             PARTY PLANNER
+        ================================== -->
+
+        <div class="planner-card">
+
+            <button
+                class="planner-title"
+                onclick="togglePlanner('partyPlanner')"
+            >
+
+                <span>
+                    🎉 Party Planner
+                </span>
+
+                <span
+                    id="partyArrow"
+                    class="arrow"
+                >
+                    ▼
+                </span>
+
+            </button>
+
+
+            <div
+                id="partyPlanner"
+                class="planner-content"
+            >
+
+                <p>
+                    Plan your party according to your
+                    guests, budget and theme.
+                </p>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Party Type
+                    </label>
+
+                    <select id="partyType">
+
+                        <option value="Birthday">
+                            Birthday
+                        </option>
+
+                        <option value="Wedding">
+                            Wedding
+                        </option>
+
+                        <option value="Anniversary">
+                            Anniversary
+                        </option>
+
+                        <option value="Engagement">
+                            Engagement
+                        </option>
+
+                        <option value="Baby Shower">
+                            Baby Shower
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Number of Guests
+                    </label>
+
+                    <input
+                        type="number"
+                        id="guestCount"
+                        placeholder="Example: 20"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Party Budget (₹)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="partyBudget"
+                        placeholder="Example: 10000"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Party Theme
+                    </label>
+
+                    <input
+                        type="text"
+                        id="partyTheme"
+                        placeholder="Example: Modern"
+                    >
+
+                </div>
+
+
+                <button
+                    class="generate-button"
+                    onclick="generatePartyPlan()"
+                >
+
+                    🎉 Generate Party Plan
+
+                </button>
+
+
+                <div
+                    id="partyResult"
+                    class="result"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================
+             HOME INTERIOR PLANNER
+        ================================== -->
+
+        <div class="planner-card">
+
+            <button
+                class="planner-title"
+                onclick="togglePlanner('homePlanner')"
+            >
+
+                <span>
+                    🏠 Home Interior
+                </span>
+
+                <span
+                    id="homeArrow"
+                    class="arrow"
+                >
+                    ▼
+                </span>
+
+            </button>
+
+
+            <div
+                id="homePlanner"
+                class="planner-content"
+            >
+
+                <p>
+                    Get interior recommendations based on
+                    your room, budget and preferred style.
+                </p>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Room Type
+                    </label>
+
+                    <select id="roomType">
+
+                        <option value="Living Room">
+                            Living Room
+                        </option>
+
+                        <option value="Bedroom">
+                            Bedroom
+                        </option>
+
+                        <option value="Kitchen">
+                            Kitchen
+                        </option>
+
+                        <option value="Dining Room">
+                            Dining Room
+                        </option>
+
+                        <option value="Study Room">
+                            Study Room
+                        </option>
+
+                        <option value="Balcony">
+                            Balcony
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Budget (₹)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="homeBudget"
+                        placeholder="Example: 50000"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Preferred Style
+                    </label>
+
+                    <input
+                        type="text"
+                        id="homeStyle"
+                        placeholder="Example: Modern"
+                    >
+
+                </div>
+
+
+                <button
+                    class="generate-button"
+                    onclick="generateHomePlan()"
+                >
+
+                    🏠 Generate Home Plan
+
+                </button>
+
+
+                <div
+                    id="homeResult"
+                    class="result"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================
+             JEWELRY PLANNER
+        ================================== -->
+
+        <div class="planner-card">
+
+            <button
+                class="planner-title"
+                onclick="togglePlanner('jewelryPlanner')"
+            >
+
+                <span>
+                    💎 Jewelry Planner
+                </span>
+
+                <span
+                    id="jewelryArrow"
+                    class="arrow"
+                >
+                    ▼
+                </span>
+
+            </button>
+
+
+            <div
+                id="jewelryPlanner"
+                class="planner-content"
+            >
+
+                <p>
+                    Find jewelry ideas according to your
+                    occasion, budget and preferred material.
+                </p>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Jewelry Type
+                    </label>
+
+                    <select id="jewelryType">
+
+                        <option value="Necklace">
+                            Necklace
+                        </option>
+
+                        <option value="Earrings">
+                            Earrings
+                        </option>
+
+                        <option value="Bracelet">
+                            Bracelet
+                        </option>
+
+                        <option value="Ring">
+                            Ring
+                        </option>
+
+                        <option value="Bangles">
+                            Bangles
+                        </option>
+
+                        <option value="Anklet">
+                            Anklet
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Occasion
+                    </label>
+
+                    <input
+                        type="text"
+                        id="occasion"
+                        placeholder="Example: Wedding"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Budget (₹)
+                    </label>
+
+                    <input
+                        type="number"
+                        id="jewelryBudget"
+                        placeholder="Example: 10000"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Preferred Material
+                    </label>
+
+                    <input
+                        type="text"
+                        id="material"
+                        placeholder="Example: Gold"
+                    >
+
+                </div>
+
+
+                <button
+                    class="generate-button"
+                    onclick="generateJewelryPlan()"
+                >
+
+                    💎 Generate Jewelry Plan
+
+                </button>
+
+
+                <div
+                    id="jewelryResult"
+                    class="result"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+</div>
+
+
+<!-- JavaScript -->
+<script src="/static/script.js"></script>
+
+</body>
+
+</html>
